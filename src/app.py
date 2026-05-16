@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 import joblib
 import pandas as pd
 
@@ -8,12 +7,6 @@ app = FastAPI()
 # Load trained model
 model = joblib.load("models/churn_model.pkl")
 
-# Input schema
-class CustomerData(BaseModel):
-    SeniorCitizen: int
-    tenure: int
-    MonthlyCharges: float
-    TotalCharges: float
 
 @app.get("/")
 def home():
@@ -21,17 +14,18 @@ def home():
         "message": "Customer Churn Prediction API Running"
     }
 
-@app.post("/predict")
-def predict(data: CustomerData):
 
-    input_data = pd.DataFrame([{
-        "SeniorCitizen": data.SeniorCitizen,
-        "tenure": data.tenure,
-        "MonthlyCharges": data.MonthlyCharges,
-        "TotalCharges": data.TotalCharges
+@app.get("/predict")
+def predict():
+
+    sample_data = pd.DataFrame([{
+        "SeniorCitizen": 1,
+        "tenure": 5,
+        "MonthlyCharges": 95,
+        "TotalCharges": 450
     }])
 
-    prediction = model.predict(input_data)
+    prediction = model.predict(sample_data)
 
     result = "Customer May Churn"
 
