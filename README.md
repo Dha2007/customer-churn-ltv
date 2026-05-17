@@ -1,57 +1,59 @@
-# Customer Churn Prediction & LTV Engine
+# Customer Churn Prediction System
 
 ## Project Overview
-This project predicts customer churn using Machine Learning and estimates Customer Lifetime Value (LTV) for customer segmentation and business insights.
+This project predicts whether a telecom customer is likely to churn using Machine Learning techniques.
 
-## Features
-- Customer churn prediction
-- Customer Lifetime Value calculation
-- Customer segmentation
-- Logistic Regression model
-- Random Forest model
-- FastAPI prediction API
-- Data visualization and EDA
+The system uses customer information such as:
+- Tenure
+- Monthly Charges
+- Total Charges
+- Senior Citizen status
+
+to predict customer churn.
+
+---
 
 ## Technologies Used
 - Python
 - Pandas
-- NumPy
 - Scikit-learn
 - FastAPI
-- Matplotlib
-- Seaborn
 - Jupyter Notebook
+- GitHub
+
+---
+
+## Machine Learning Model
+- Random Forest Classifier
+
+---
+
+## API Features
+- Predict customer churn
+- FastAPI backend
+- Swagger API testing interface
+
+---
 
 ## Project Structure
+
 customer-churn-ltv/
 │
 ├── data/
+├── models/
 ├── notebooks/
 ├── src/
-│   ├── models/
 │   └── app.py
+│
+├── README.md
 ├── requirements.txt
-└── README.md
+├── .gitignore
 
-## API Usage
+---
 
-Run the API server:
+## How to Run
 
-uvicorn app:app --reload
+### Activate Virtual Environment
 
-Open Swagger UI:
-
-http://127.0.0.1:8000/docs
-
-## Machine Learning Models
-- Logistic Regression
-- Random Forest Classifier
-
-## Future Improvements
-- Frontend dashboard
-- Cloud deployment
-- Real-time prediction system
-- Advanced hyperparameter tuning
-
-## Author
-Mounya Sai Sree
+```bash
+venv\Scripts\activate
