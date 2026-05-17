@@ -1,37 +1,45 @@
 from fastapi import FastAPI
-import joblib
+from pydantic import BaseModel
 import pandas as pd
+import joblib
 
+# Load saved model
+model = joblib.load(r"C:\Users\Mounya\customer-churn-ltv\models\churn_model.pkl")
+
+# Create FastAPI app
 app = FastAPI()
 
-# Load trained model
-model = joblib.load("models/churn_model.pkl")
+# Input schema
+class CustomerData(BaseModel):
+    tenure: int
+    MonthlyCharges: float
+    TotalCharges: float
+    SeniorCitizen: int
 
-
+# Home route
 @app.get("/")
 def home():
-    return {
-        "message": "Customer Churn Prediction API Running"
-    }
+    return {"message": "Customer Churn Prediction API Running"}
 
+# Prediction route
+@app.post("/predict")
+def predict(data: CustomerData):
 
-@app.get("/predict")
-def predict():
-
-    sample_data = pd.DataFrame([{
-        "SeniorCitizen": 1,
-        "tenure": 5,
-        "MonthlyCharges": 95,
-        "TotalCharges": 450
+    # Convert input into dataframe
+    input_data = pd.DataFrame([{
+        "tenure": data.tenure,
+        "MonthlyCharges": data.MonthlyCharges,
+        "TotalCharges": data.TotalCharges,
+        "SeniorCitizen": data.SeniorCitizen
     }])
 
-    prediction = model.predict(sample_data)
+    # Predict
+    prediction = model.predict(input_data)[0]
 
-    result = "Customer May Churn"
+    # Result
+    if prediction == 1:
+        result = "Customer Will Churn"
+    else:
+        result = "Customer Will Stay"
 
-    if prediction[0] == 0:
-        result = "Customer Likely To Stay"
-
-    return {
-        "prediction": result
-    }
+    return {"prediction": result}
