@@ -1,59 +1,36 @@
-# Customer Churn Prediction System
+# Customer Churn & LTV Prediction API
 
 ## Project Overview
-This project predicts whether a telecom customer is likely to churn using Machine Learning techniques.
+This project predicts customer churn and customer lifetime value using Machine Learning and FastAPI.
 
-The system uses customer information such as:
-- Tenure
-- Monthly Charges
-- Total Charges
-- Senior Citizen status
-
-to predict customer churn.
-
----
+## Features
+- Customer churn prediction
+- Lifetime value estimation
+- FastAPI backend
+- REST API endpoints
+- Swagger documentation
+- Cloud deployment using Render
 
 ## Technologies Used
 - Python
-- Pandas
-- Scikit-learn
 - FastAPI
-- Jupyter Notebook
+- Uvicorn
+- Scikit-learn
+- Pandas
+- NumPy
+- Render
 - GitHub
 
----
+## API Deployment
 
-## Machine Learning Model
-- Random Forest Classifier
+Live API:
+https://customer-churn-api-qv5c.onrender.com
 
----
+Swagger Docs:
+https://customer-churn-api-qv5c.onrender.com/docs
 
-## API Features
-- Predict customer churn
-- FastAPI backend
-- Swagger API testing interface
-
----
-
-## Project Structure
-
-customer-churn-ltv/
-│
-├── data/
-├── models/
-├── notebooks/
-├── src/
-│   └── app.py
-│
-├── README.md
-├── requirements.txt
-├── .gitignore
-
----
-
-## How to Run
-
-### Activate Virtual Environment
+## Run Locally
 
 ```bash
-venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn src.app:app --reload
